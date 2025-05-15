@@ -43,16 +43,16 @@ def ipleri_fayla_yaz(ipler, fayl_adi="ip.txt"):
         for ip in ipler:
             if ip:
                 f.write(ip + "\n")
-    print(f"IP adresləri {fayl_adi} faylına yazıldı.")
+    print(f"IP addresses have been written to the file {fayl_adi}.")
 
 def esas():
     parser = argparse.ArgumentParser(description="Origin IP Finder")
-    parser.add_argument("-d", "--domain", required=True, help="Hədəf domain qeyd edin")
+    parser.add_argument("-d", "--domain", required=True, help="Enter the target domain")
     args = parser.parse_args()
     
-    api_acari = input("VirusTotal API Açari: ")
+    api_acari = input("VirusTotal API Key: ")
     
-    print("[*] IP adresleri toplanir...")
+    print("[*] Collecting IP addresses...")
     vt_ipler = [giris["ip_address"] for giris in virustotal_iplerini_al(args.domain, api_acari) if "ip_address" in giris]
     av_ipler = alienvault_iplerini_al(args.domain)
     us_ipler = urlscan_iplerini_al(args.domain)
